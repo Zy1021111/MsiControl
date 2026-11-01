@@ -1,0 +1,55 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    MsiControl.Desktop —— 轻量 WinForms 桌面壳
+    负责任务：02 桌面框架（文件归属见任务书 §15.1）
+    约束：
+      - 目标框架 net8.0-windows（任务书 §13）；不使用 Electron / WebView2。
+      - **不直接接触任何硬件**：只订阅采样结果、只发出控制请求。
+        窗口从不调用 IFanHardware / IPerformanceHardware / IGraphicsHardware（任务书 §16、规则 11）。
+      - 不引用 MsiControl.Hardware.Msi：能力基线由宿主（任务 07）注入，
+        避免「界面层自己去问硬件」破坏依赖方向（design.md §13.1）。
+  -->
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>MsiControl.Desktop</RootNamespace>
+    <AssemblyName>MsiControl.Desktop</AssemblyName>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Resources\app.ico</ApplicationIcon>
+    <IsPackable>false</IsPackable>
+    <Description>MSI-Control 桌面壳：正常窗口、迷你窗口、托盘、快捷键与主题跟随。</Description>
+  </PropertyGroup>
+
+  <!--
+    应用图标：同一份 app.ico 既作为 exe 图标（ApplicationIcon），
+    也嵌入为清单资源供窗口标题栏、托盘与界面上品牌标使用（Resources/AppIcon.cs）。
+    生成脚本：scripts/make_icon.py（9 档尺寸，逐尺寸超采样，含 16px 简化轮廓）。
+  -->
+  <ItemGroup>
+    <None Remove="Resources\app.ico" />
+    <EmbeddedResource Include="Resources\app.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MsiControl.Core\MsiControl.Core.csproj" />
+    <ProjectReference Include="..\MsiControl.Persistence\MsiControl.Persistence.csproj" />
+    <!--
+      任务 07（整合负责人）加入：桌面壳本身仍**不接触任何硬件**，
+      只消费应用层装配好的协调器与能力基线。
+      依赖方向 Desktop → Application → Core ← Hardware.Msi（design.md §13.1）。
+    -->
+    <ProjectReference Include="..\MsiControl.Application\MsiControl.Application.csproj" />
+  </ItemGroup>
+
+  <!--
+    桌面提示（OSD）的文案与语气映射是纯逻辑，必须可单测：
+    窗体绘制不能测，但「哪个状态配哪个词/哪种颜色」可以。
+  -->
+  <ItemGroup>
+    <InternalsVisibleTo Include="MsiControl.Desktop.Tests" />
+  </ItemGroup>
+
+</Project>

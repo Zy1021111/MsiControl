@@ -1,0 +1,54 @@
+# ---- .NET 构建产物 ----
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+dist/
+artifacts/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+.vscode/
+*.binlog
+
+# ---- 测试与覆盖率 ----
+TestResults/
+[Tt]est[Rr]esult*/
+*.trx
+*.coverage
+*.coveragexml
+coverage*.xml
+coverage*.json
+
+# ---- 运行期/诊断输出 ----
+*.log
+*.out
+*.err
+*.tmp
+*.bak
+ec_*.log
+probe_*
+
+# ---- 本机抓取与取证快照 ----
+screenshots/
+scripts/__pycache__/
+__pycache__/
+*.pyc
+scripts/*.cache/
+
+# ---- 原生二进制与本地工具 ----
+*.dll
+*.exe
+*.pdb
+*.msi
+*.zip
+!assets/PawnIo/*.bin
+
+# ---- 系统与编辑器 ----
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.swp
+*~

@@ -1,0 +1,35 @@
+<Project>
+
+  <!--
+    MSI-Control 公共构建配置
+    负责人：整合负责人（任务 07）
+    对应：任务书 §13、§14.1；docs/接口与工程约定.md §5
+  -->
+
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- 语言版本由 SDK 决定，不在此硬编码（任务书 §13） -->
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+
+    <!-- 不主动压制任何警告：参见 接口与工程约定 §5 -->
+    <NoWarn></NoWarn>
+
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <NeutralLanguage>zh-Hans</NeutralLanguage>
+    <Deterministic>true</Deterministic>
+    <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+
+  <!-- 版本号：全解决方案统一，由本文件单点维护 -->
+  <PropertyGroup>
+    <Version>1.00</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Product>MSI-Control</Product>
+    <Company>MSI-Control</Company>
+    <Copyright>Copyright (c) 2026</Copyright>
+  </PropertyGroup>
+
+</Project>

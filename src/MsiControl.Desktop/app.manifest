@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1">
+  <!--
+    MSI-Control 应用清单（任务 02 桌面框架）
+    - DPI：PerMonitorV2，满足 design.md §4.1「支持系统 DPI 缩放」。
+    - 权限：asInvoker。本程序不请求管理员权限；
+      若后续实测证明某项硬件写入必须提权，须先给出证据再调整（任务书 §13、§1 原则 8）。
+    - 不使用 UIAccess，不请求 uiAccess 自动提权。
+  -->
+  <assemblyIdentity version="1.0.0.0" name="MsiControl.Desktop.app" />
+
+  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
+    <security>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+
+  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+    <application>
+      <!-- Windows 10 / 11 -->
+      <supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}" />
+    </application>
+  </compatibility>
+
+  <!--
+    说明：此处刻意不声明 dpiAware / dpiAwareness。
+    高 DPI 由 Application.SetHighDpiMode(HighDpiMode.PerMonitorV2) 在进程启动早期设置，
+    两处同时声明会触发 WFAC010 警告；以 API 为唯一来源可避免不一致。
+  -->
+</assembly>

@@ -1,0 +1,86 @@
+﻿# MSI-Control 任务 03 实机只读扫描报告
+生成时间：2026-10-16 20:29:09 +08:00
+机器：MSI，CLR 8.0.32
+OS：Microsoft Windows NT 10.0.26300.0
+
+## 1. 能力基线（用于门控）
+- cpu.power = Detected
+- cpu.turbo = Unknown
+- ec.access = Detected
+- fan.calibration = Unknown
+- fan.curve = Detected
+- fan.fullspeed = Unknown
+- firmware.scenario = Detected
+- gpu.eco = Unknown
+- gpu.power = Detected
+- graphics.mode = Unknown
+- power.battery = Detected
+- power.range = Detected
+- power.system = Unknown
+- thermal.fallback = Verified
+- thermal.read = Detected
+
+## 2. 各数据源单次读取耗时（20 次）
+- ACPI 热区温度：最小 1.418 ms，平均 3.099 ms，最大 31.731 ms（20 次）；末次结果类型 SensorReading
+- 处理器性能计数（频率）：最小 0.143 ms，平均 0.544 ms，最大 5.843 ms（20 次）；末次结果类型 SensorReading
+- 处理器性能计数（利用率）：最小 0.078 ms，平均 0.295 ms，最大 1.164 ms（20 次）；末次结果类型 ExtendedSensor[]
+- 内存占用：最小 2.71 ms，平均 3.128 ms，最大 6.901 ms（20 次）；末次结果类型 ExtendedSensor[]
+- 电池侧功率：最小 1.483 ms，平均 1.711 ms，最大 2.881 ms（20 次）；末次结果类型 SystemPowerReading
+- 独显在线性探测：最小 12.485 ms，平均 15.738 ms，最大 64.096 ms（20 次）；末次结果类型 GpuPresence
+- 独显 NVML 四项：最小 0.001 ms，平均 2.486 ms，最大 49.674 ms（20 次）；末次结果类型 GpuSnapshot
+- 独显 NVML 扩展项：最小 0.03 ms，平均 0.198 ms，最大 3.274 ms（20 次）；末次结果类型 ExtendedSensor[]
+- EC 固件响应（首次）：最小 17.307 ms，平均 17.307 ms，最大 17.307 ms（1 次）；末次结果类型 EcFirmwareReading
+
+## 3. 采样快照（真实读数）
+- 采样时刻：20:29:10.629 +08:00
+- 频率口径：AverageActive
+- CPU 温度：Valid，值=69.05 °C，来源=MSAcpi_ThermalZoneTemperature（ACPI\ThermalZone\THRM_0，ACPI 热区，非 CPU 封装温度）
+- CPU 频率(MHz)：Valid，值=3811.89 MHz，来源=PDH:\Processor Information（活跃核心均值，10）
+- CPU 封装功耗(W)：Unavailable，值=- W，来源=CPU 封装功耗，说明=本机无已验证的 CPU 封装功耗读取路径：MSI_ACPI.Get_Power 的 Data 参数（Package_32）编码未验证，Windows 也不提供 RAPL 包装度量。
+- CPU 风扇 RPM：Unavailable，值=- RPM，来源=风扇转速，说明=本机无已验证的风扇转速读取路径：MSI_ACPI.Get_Fan 的 Data 参数（Package_32）编码未验证；也未完成有效校准，故不提供百分比。
+- GPU 温度：Valid，值=52 °C，来源=NVML:NVIDIA GeForce RTX 5070 Ti Laptop GPU
+- GPU 核心频率(MHz)：Valid，值=1402 MHz，来源=NVML:NVIDIA GeForce RTX 5070 Ti Laptop GPU
+- GPU 功耗(W)：Valid，值=19.917 W，来源=NVML:NVIDIA GeForce RTX 5070 Ti Laptop GPU
+- GPU 风扇 RPM：Unavailable，值=- RPM，来源=NVML（NVIDIA 驱动管理库，进程内调用），说明=NVML 只提供风扇占空比百分比、不提供 RPM；且未完成校准，按其语义不得写入 ActualPercent。读数请见扩展传感器「GPU 风扇」。（NVIDIA GeForce RTX 5070 Ti Laptop GPU 正常枚举（Availability=3）。）
+- 风扇(CPU 通道)：Unavailable，值=- RPM，来源=风扇转速，说明=本机无已验证的风扇转速读取路径：MSI_ACPI.Get_Fan 的 Data 参数（Package_32）编码未验证；也未完成有效校准，故不提供百分比。
+- 风扇(GPU 通道)：Unavailable，值=- RPM，来源=风扇转速，说明=本机无已验证的风扇转速读取路径：MSI_ACPI.Get_Fan 的 Data 参数（Package_32）编码未验证；也未完成有效校准，故不提供百分比。
+- 整机功耗：口径=Unknown，可用=False
+- 整机功耗：Unavailable，值=- W，来源=整机功耗，说明=整机功耗读取能力「power.system」当前为 Unknown，按能力等级制度不得读取。依据：HWE §7：无可靠整机功耗来源；本机大概率仅电池侧可得。不得用 CPU+GPU 之和顶替。（本机无可靠的整机功耗来源：适配器输入（AdapterInput）与插座（WallSocket）均不可得；电池侧（BatterySide）仅在拔电放电时有读数。按口径纪律，三者不可混用、不可相加，更不得用 CPU 功耗与 GPU 功耗之和顶替整机功耗。）
+- 扩展·CPU 利用率（cpu.utilization）：Valid，值=0 %，来源=PDH:\Processor Information（_Total.% Processor Time）
+- 扩展·内存占用（每 5 秒刷新）（system.memory）：Valid，值=73.244 %，来源=Win32_OperatingSystem（TotalVisibleMemorySize / FreePhysicalMemory）
+- 扩展·SSD 温度（storage.ssd.temperature）：Unavailable，值=- °C，来源=SMART / 存储 API，说明=本机无可读取的 SSD 温度来源（MSFT_StorageReliabilityCounter 与 MSStorageDriver_ATAPISmartData 均无实例）。
+- 扩展·电池放电功率（每 5 秒刷新）（power.battery.discharge）：Unavailable，值=- W，来源=root\WMI:BatteryStatus（电池侧），说明=电池当前未放电（已接交流电）。
+- 扩展·电池充电功率（每 5 秒刷新）（power.battery.charge）：Unavailable，值=- W，来源=root\WMI:BatteryStatus（电池侧），说明=电池当前未充电（已充满或未接交流电）。
+- 扩展·GPU 利用率（gpu.utilization）：Valid，值=9 %，来源=NVML:NVIDIA GeForce RTX 5070 Ti Laptop GPU:nvmlDeviceGetUtilizationRates(GPU)
+- 扩展·显存占用（gpu.vram）：Valid，值=10.723 %，来源=NVML:NVIDIA GeForce RTX 5070 Ti Laptop GPU:nvmlDeviceGetMemoryInfo
+- 扩展·显存频率（gpu.memclock）：Valid，值=9001 MHz，来源=NVML:NVIDIA GeForce RTX 5070 Ti Laptop GPU:nvmlDeviceGetClockInfo(MEM)
+- 扩展·GPU 风扇（NVML 占空比）（gpu.fan）：Unavailable，值=- %，来源=NVML:NVIDIA GeForce RTX 5070 Ti Laptop GPU，说明=读取风扇百分比失败：NVML_ERROR_NOT_SUPPORTED（3）：Not Supported
+- 扩展·GPU 功耗限制（gpu.powerlimit）：Unavailable，值=- W，来源=NVML:NVIDIA GeForce RTX 5070 Ti Laptop GPU，说明=读取 GPU 功耗限制失败：NVML_ERROR_NOT_SUPPORTED（3）：Not Supported
+- 扩展·GPU 降频温度阈值（gpu.temp.limit）：Valid，值=99 °C，来源=NVML:NVIDIA GeForce RTX 5070 Ti Laptop GPU:nvmlDeviceGetTemperatureThreshold(SLOWDOWN)
+
+## 4. EC 固件响应
+- 可读：True
+- 原始文本：15M3EMS1.1131126202514:59:28
+- 原始字节：018131354D33454D53312E313133313132363230323531343A35393A32380000
+- 说明：Get_EC：provider 未暴露 ReturnValue，无法判定固件是否接受该调用；必须读回确认。
+
+## 5. 诊断（诊断开关关闭时也应能取到数据源状态）
+- cpu.frequency.pdh：最近成功=20:29:10.636，耗时=0.39 ms，连续失败=0
+- cpu.power.none：最近成功=20:29:10.636，耗时=0.04 ms，连续失败=0
+- cpu.temperature.thermalzone：最近成功=20:29:10.635，耗时=4.1 ms，连续失败=0
+- cpu.utilization.pdh：最近成功=20:29:10.706，耗时=0.29 ms，连续失败=0
+- fan.rpm.none：最近成功=20:29:10.704，耗时=0 ms，连续失败=0
+- gpu.nvml：最近成功=20:29:10.727，耗时=0.33 ms，连续失败=0
+- power.battery.batterystatus：最近成功=20:29:10.727，耗时=2.14 ms，连续失败=0
+- storage.ssd.temperature.source：最近成功=20:29:10.725，耗时=14.25 ms，连续失败=0
+- system.memory.wmi：最近成功=20:29:10.710，耗时=3.65 ms，连续失败=0
+- 备注：整机功耗槽位已按能力门控关闭：power.system = Unknown。已探明电池侧（power.battery）在拔电时可得放电功率，但口径为 BatterySide，需由任务 01 复核该键等级后才可提升为整机功耗；未复核前不使用替代数据。
+- 备注：MSI_ACPI.Get_EC 已读到内容：15M3EMS1.1131126202514:59:28（原始字节 018131354D33454D53312E313133313132363230323531343A35393A32380000）。
+
+## 6. 采样循环资源占用（每 1 秒一次，共 20 次）
+- 单次采样耗时：最小 2.742 ms，平均 16.018 ms，最大 79.072 ms
+- 采样期总 CPU 时间增量：375 ms（约 20 秒挂钟时间）
+- 每个采样周期占单核比例：1.875 %（按 10 段单核 1 秒计）
+- 工作集变化：85.05 MiB → 89.57 MiB
+- 私有内存：40.42 MiB
+- 状态序列（温度/频率/独显温度/整机功耗）：Valid/Valid/Valid/Unavailable

@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    MsiControl.Monitoring.Tests
+    负责任务：03 实时监控
+    说明：
+      - net8.0-windows：被测工程为 net8.0-windows（WMI / NVML），测试须同 TFM。
+      - 单元测试一律使用测试替身，不接触真实硬件，可在任意机器上重复运行。
+      - 实机测试集中在 RealHardwareTests，需设置环境变量 MSI_CONTROL_HW_TESTS=1 才执行。
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <RootNamespace>MsiControl.Monitoring.Tests</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\MsiControl.Monitoring\MsiControl.Monitoring.csproj" />
+  </ItemGroup>
+
+</Project>

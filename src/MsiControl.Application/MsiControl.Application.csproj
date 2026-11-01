@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    MsiControl.Application —— 应用层：控制协调器、自动策略与整合装配
+    负责任务：07 自动策略与整合（文件归属见任务书 §15.1）
+    约束：
+      - 目标框架 net8.0-windows：需要读取注册表中的 SMBIOS 设备标识
+        （Microsoft.Win32.Registry 的平台注解在 net8.0 下触发 CA1416），
+        并且要消费同为 net8.0-windows 的 MsiControl.Hardware.Msi。
+      - 本工程**不含任何硬件访问**：不调用 WMI / ACPI / EC，不实例化
+        IFanHardware / IPerformanceHardware / IGraphicsHardware 的实现，
+        只消费 Core 的接口与本机能力基线。
+      - 不引用 MsiControl.Desktop：桌面壳是应用层的消费方，依赖方向单向
+        （design.md §13.1）。界面侧的接缝适配由桌面壳自己完成。
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <RootNamespace>MsiControl.Application</RootNamespace>
+    <AssemblyName>MsiControl.Application</AssemblyName>
+    <IsPackable>false</IsPackable>
+    <Description>MSI-Control 应用层：串行控制协调器、启动/供电/退出策略、模块接入状态与整合装配。</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MsiControl.Core\MsiControl.Core.csproj" />
+    <ProjectReference Include="..\MsiControl.Hardware.Msi\MsiControl.Hardware.Msi.csproj" />
+    <!--
+      组合根（任务 07）装配 02–06 已交付的模块入口工程。
+      依赖方向仍满足 design.md §13.1：Desktop → Application →（各业务模块 / Hardware.Msi）→ Core；
+      业务模块彼此不互相引用，也不引用 Desktop 或 Application。
+      注意：各业务模块的写入仍由能力门控关闭，装配本身不放宽任何权限。
+    -->
+    <ProjectReference Include="..\MsiControl.Monitoring\MsiControl.Monitoring.csproj" />
+    <ProjectReference Include="..\MsiControl.Fans\MsiControl.Fans.csproj" />
+    <ProjectReference Include="..\MsiControl.Performance\MsiControl.Performance.csproj" />
+    <ProjectReference Include="..\MsiControl.Graphics\MsiControl.Graphics.csproj" />
+  </ItemGroup>
+
+</Project>

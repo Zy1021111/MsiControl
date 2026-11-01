@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    MsiControl.Graphics —— 显卡模式模块
+    负责任务：06（显卡切换）
+
+    定位：
+      - 实现共享契约层的 IGraphicsHardware（src/MsiControl.Core/Interfaces/IGraphicsHardware.cs）。
+      - 承载显卡模式切换的**策略与门控**（GraphicsSwitchPolicy）与**显示拓扑**语义。
+      - 本机未定位到任何可验证的显卡模式切换接口，故写入路径默认由
+        UnsupportedGraphicsModeWriter 承接，一律返回「不支持」并附依据；
+        绝不以「设备管理器禁用独显」或「应用 GPU 偏好」冒充模式切换（任务书 §9.3）。
+
+    目标框架 net8.0-windows：显示拓扑探测引用 MsiControl.Hardware.Msi
+    （该工程因 System.Management 为 net8.0-windows，消费方须同 TFM）。
+
+    依赖方向：Graphics → Core（契约）+ Hardware.Msi（只读硬件探测）。
+      Graphics 不引用任何 UI，也不直接拼接 WMI 查询或 ACPI 参数——
+      硬件细节全部封装在 Hardware.Msi/Devices/Ms15M3/Graphics*.cs 之内。
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <RootNamespace>MsiControl.Graphics</RootNamespace>
+    <AssemblyName>MsiControl.Graphics</AssemblyName>
+    <IsPackable>false</IsPackable>
+    <Description>显卡模式模块：能力门控、切换策略、显示拓扑与外接屏风险评估。</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MsiControl.Core\MsiControl.Core.csproj" />
+    <ProjectReference Include="..\MsiControl.Hardware.Msi\MsiControl.Hardware.Msi.csproj" />
+  </ItemGroup>
+
+  <!--
+    供回归测试覆盖「写入方委派」这条**生产环境不可达**的分支：
+    本机没有显卡模式切换接口，GraphicsModeInference 只会把当前生效模式标为受支持，
+    因此「允许写入」分支只能由测试注入受控状态来触发（见 GraphicsHardwareService 的内部重载）。
+  -->
+  <ItemGroup>
+    <InternalsVisibleTo Include="MsiControl.Graphics.Tests" />
+  </ItemGroup>
+
+</Project>

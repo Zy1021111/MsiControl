@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    MsiControl.Fans —— 风扇业务模块
+    负责任务：04 风扇控制
+
+    约束：
+      - 依赖方向：Desktop → Application → Fans → Core。
+      - 本模块只做「曲线校验 / 应用流程 / 状态区分 / 校准编排 / 软件调速策略」，
+        不直接接触 WMI（由 MsiControl.Hardware.Msi 承担）。
+      - TFM 必须与 MsiControl.Hardware.Msi 一致（net8.0-windows）：
+        本模块消费其 FanCurveLimits（硬件报告的限制）与原始诊断通道。
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <RootNamespace>MsiControl.Fans</RootNamespace>
+    <AssemblyName>MsiControl.Fans</AssemblyName>
+    <IsPackable>false</IsPackable>
+    <Description>风扇曲线校验、应用与恢复流程、校准编排与软件调速策略。</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MsiControl.Core\MsiControl.Core.csproj" />
+    <ProjectReference Include="..\MsiControl.Hardware.Msi\MsiControl.Hardware.Msi.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    MsiControl.Core —— 共享模型、接口与工程约定
+    负责任务：01 基础接口
+    约束：本工程不得包含任何真实硬件写入实现（任务书 §15）
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>MsiControl.Core</RootNamespace>
+    <AssemblyName>MsiControl.Core</AssemblyName>
+    <IsPackable>false</IsPackable>
+    <Description>MSI-Control 共享契约层：模型、能力等级、状态与硬件接口。</Description>
+  </PropertyGroup>
+
+</Project>

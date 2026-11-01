@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    MsiControl.Persistence —— 本地配置、配置导入导出与有界日志
+    负责任务：02 桌面框架（文件归属见任务书 §15.1）
+    约束：
+      - 纯 net8.0：**不得引用 System.Windows.Forms / System.Drawing**，
+        以保证配置层可被非 UI 宿主（测试、后续诊断工具）复用。
+      - 不接触任何硬件。导入配置只做校验，不写入硬件（任务书 §7.3）。
+      - 配置内必须记录 DeviceIdentity；导入时须同时检查 IsIdentified 与 IsSameBoardAs
+        （docs/接口与工程约定.md §3.10、任务书 §2.2）。
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>MsiControl.Persistence</RootNamespace>
+    <AssemblyName>MsiControl.Persistence</AssemblyName>
+    <IsPackable>false</IsPackable>
+    <Description>MSI-Control 本地配置存储、配置档导入导出校验与有界轮转日志。</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MsiControl.Core\MsiControl.Core.csproj" />
+  </ItemGroup>
+
+</Project>

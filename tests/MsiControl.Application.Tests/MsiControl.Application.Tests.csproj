@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    MsiControl.Application.Tests
+    负责任务：07 自动策略与整合
+    约束：与被测工程一致，使用 net8.0-windows。
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <RootNamespace>MsiControl.Application.Tests</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\MsiControl.Application\MsiControl.Application.csproj" />
+    <ProjectReference Include="..\..\src\MsiControl.Core\MsiControl.Core.csproj" />
+    <ProjectReference Include="..\..\src\MsiControl.Hardware.Msi\MsiControl.Hardware.Msi.csproj" />
+  </ItemGroup>
+
+</Project>

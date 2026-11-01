@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    MsiControl.Tools.EcProbe —— PawnIO EC 通道只读诊断工具（阶段 A）
+    约束：
+      - 只读工具：不提供任何写入命令；通道构造时写白名单恒为空集。
+      - 加入 sln 以便一键构建，但不进入主应用依赖图（主应用不引用本工程）。
+      - 运行需管理员权限（PawnIO 设备 ACL 决定）。
+  -->
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <RootNamespace>MsiControl.Tools.EcProbe</RootNamespace>
+    <AssemblyName>EcProbe</AssemblyName>
+    <IsPackable>false</IsPackable>
+    <Description>MS-15M3 EC 寄存器只读诊断：status / firmware / dump / dump-all / watch。</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MsiControl.Hardware.Msi\MsiControl.Hardware.Msi.csproj" />
+  </ItemGroup>
+
+</Project>

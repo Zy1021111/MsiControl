@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    MsiControl.Performance.Tests
+    负责任务：05 性能与功耗
+
+    引用 Hardware.Msi 是为了覆盖 MS-15M3 的 IPerformanceHardware 实现与设置项标识一致性；
+    因此本工程与被测工程同为 net8.0-windows。
+    Hardware.Msi 侧通过 IMsiAcpiTransport 注入假通道，测试不接触真实硬件。
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <RootNamespace>MsiControl.Performance.Tests</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\MsiControl.Performance\MsiControl.Performance.csproj" />
+    <ProjectReference Include="..\..\src\MsiControl.Hardware.Msi\MsiControl.Hardware.Msi.csproj" />
+    <ProjectReference Include="..\..\src\MsiControl.Core\MsiControl.Core.csproj" />
+  </ItemGroup>
+
+</Project>

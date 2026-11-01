@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    MsiControl.Performance —— 性能与功耗领域模块
+    负责任务：05（性能与功耗）
+    约束：
+      - 本工程不接触任何硬件接口（不引用 System.Management，也不引用 Hardware.Msi）。
+        硬件访问一律经 MsiControl.Core.Interfaces.IPerformanceHardware 注入。
+      - 保持 net8.0：为可离线、可跨平台运行的纯领域逻辑，便于单元测试。
+      依赖方向（任务书 §13）：Performance → Core；Hardware.Msi 仅依赖 Core。
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>MsiControl.Performance</RootNamespace>
+    <AssemblyName>MsiControl.Performance</AssemblyName>
+    <IsPackable>false</IsPackable>
+    <Description>MSI-Control 性能与功耗领域模块：可写范围判定、五档应用计划、GPU 替代策略、限制生效性判定与第三方共存检测。</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MsiControl.Core\MsiControl.Core.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    MsiControl.Persistence.Tests
+    负责任务：02 桌面框架（Persistence 部分）
+    说明：本工程为任务 02 新增，已登记于 docs/接口与工程约定.md §4，待整合负责人同步任务书 §14/§15.1。
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>MsiControl.Persistence.Tests</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\MsiControl.Core\MsiControl.Core.csproj" />
+    <ProjectReference Include="..\..\src\MsiControl.Persistence\MsiControl.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    MsiControl.Desktop.Tests
+    负责任务：02 桌面框架（Desktop 部分）
+    说明：
+      - 目标框架与 UseWindowsForms 与被测工程一致，否则无法加载界面层类型。
+      - 只测试无窗口的纯逻辑（格式化、能力门控文案、主题配色、快捷键解析），
+        不构造窗体、不依赖消息循环。
+      - 本工程为任务 02 新增，已登记于 docs/接口与工程约定.md §4，待整合负责人同步任务书 §14/§15.1。
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>MsiControl.Desktop.Tests</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\MsiControl.Core\MsiControl.Core.csproj" />
+    <ProjectReference Include="..\..\src\MsiControl.Persistence\MsiControl.Persistence.csproj" />
+    <ProjectReference Include="..\..\src\MsiControl.Desktop\MsiControl.Desktop.csproj" />
+  </ItemGroup>
+
+</Project>

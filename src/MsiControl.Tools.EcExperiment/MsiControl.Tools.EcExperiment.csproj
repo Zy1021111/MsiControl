@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    MsiControl.Tools.EcExperiment —— EC 受控对照实验工具（A3–A7 与阶段 B 定位）
+    仅用于实验窗口：对白名单内寄存器执行写入并读回验证，全部操作落盘日志。
+    与 EcProbe（恒零写入）不同：本工具按命令行显式执行写入，属实验仪器，不进入主应用。
+  -->
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <RootNamespace>MsiControl.Tools.EcExperiment</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <Description>MS-15M3 EC 受控对照实验工具（写白名单限寄存器表候选）。</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\MsiControl.Hardware.Msi\MsiControl.Hardware.Msi.csproj" />
+  </ItemGroup>
+
+</Project>

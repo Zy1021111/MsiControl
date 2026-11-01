@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    MsiControl.Fans.Tests
+    负责任务：04 风扇控制
+
+    与被测工程同 TFM（net8.0-windows）：MsiControl.Fans 依赖 MsiControl.Hardware.Msi，
+    后者因 System.Management 必须为 net8.0-windows。
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <RootNamespace>MsiControl.Fans.Tests</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\MsiControl.Fans\MsiControl.Fans.csproj" />
+    <ProjectReference Include="..\..\src\MsiControl.Hardware.Msi\MsiControl.Hardware.Msi.csproj" />
+    <ProjectReference Include="..\..\src\MsiControl.Core\MsiControl.Core.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    MsiControl.Graphics.Tests
+    负责任务：06 显卡切换
+
+    为什么单独建测试工程：任务书 §15.1 的文件归属矩阵只登记了
+    Core.Tests / Hardware.Msi.Tests / Application.Tests，未为 04—06 分配测试目录。
+    为避免改动任务 01 名下的 tests/MsiControl.Hardware.Msi.Tests，
+    本任务沿用任务 02 的既有做法（新增自带测试工程），
+    并已在 docs/接口与工程约定.md 与交付说明中登记为待整合负责人（07）同步的偏差项。
+
+    目标框架 net8.0-windows：被测工程 MsiControl.Graphics 引用 net8.0-windows 的
+    MsiControl.Hardware.Msi，消费方须同 TFM。
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <RootNamespace>MsiControl.Graphics.Tests</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\MsiControl.Graphics\MsiControl.Graphics.csproj" />
+    <ProjectReference Include="..\..\src\MsiControl.Hardware.Msi\MsiControl.Hardware.Msi.csproj" />
+    <ProjectReference Include="..\..\src\MsiControl.Core\MsiControl.Core.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    MsiControl.Monitoring —— 实时监控：单一共享采样、传感器来源、有效期与降级
+    负责任务：03 实时监控（文件归属见任务书 §15.1）
+    约束：
+      - 本工程**只读**：不修改任何功耗、风扇或显卡设置，不调用任何 Set_* 方法。
+      - 只做「采样 + 判定状态」：采样调度由桌面壳的 SnapshotStream 持有（任务 02），
+        本工程**不创建任何计时器或后台线程**，避免出现第二个采样循环。
+      - 一律使用进程内 API（WMI / NVML P/Invoke），**不周期创建外部命令进程**（任务书 §13.4）。
+      - net8.0-windows：需要 System.Management（WMI）与 nvml.dll（NVML）平台调用。
+      - 引用 MsiControl.Hardware.Msi 仅为复用其**只读**的 MSI_ACPI 调用通道
+        （IMsiAcpiTransport，白名单只放行 Get_*），不复制第二套 WMI 低层管道。
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <RootNamespace>MsiControl.Monitoring</RootNamespace>
+    <AssemblyName>MsiControl.Monitoring</AssemblyName>
+    <IsPackable>false</IsPackable>
+    <Description>MSI-Control 实时监控：统一采样、传感器来源、读数状态与降级策略。</Description>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Management" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MsiControl.Core\MsiControl.Core.csproj" />
+    <ProjectReference Include="..\MsiControl.Hardware.Msi\MsiControl.Hardware.Msi.csproj" />
+  </ItemGroup>
+
+</Project>
